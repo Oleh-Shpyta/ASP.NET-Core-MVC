@@ -1,0 +1,45 @@
+
+@model List<ContactApp.Models.Contact>
+
+@{
+    ViewData["Title"] = "Контакти";
+}
+<link rel="stylesheet" href="/css/style.css" />
+<script src="/js/site.js"></script>
+
+<h1>Контакти</h1>
+
+<form asp-action="Add" method="post" class="form-box">
+    <input name="Name" placeholder="Ім'я" required />
+    <input name="MobilePhone" placeholder="Мобільний" required />
+    <input name="AlternativePhone" placeholder="Альт. Телефон" />
+    <input name="Email" placeholder="Email" type="email" />
+    <input name="Description" placeholder="Опис" />
+    <button type="submit">Додати</button>
+</form>
+
+<table class="contact-table">
+    <thead>
+        <tr>
+            <th>Ім'я</th>
+            <th>Телефон</th>
+            <th>Альт.</th>
+            <th>Email</th>
+            <th>Опис</th>
+            <th>Дія</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var contact in Model)
+    {
+        <tr>
+            <td>@contact.Name</td>
+            <td>@contact.MobilePhone</td>
+            <td>@contact.AlternativePhone</td>
+            <td>@contact.Email</td>
+            <td>@contact.Description</td>
+            <td><a href="/Contact/Delete/@contact.Id" onclick="return confirmDelete()">Видалити</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
